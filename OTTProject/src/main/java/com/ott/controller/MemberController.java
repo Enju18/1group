@@ -67,7 +67,7 @@ public class MemberController {
 	
 	@RequestMapping("/memberAccount")
 	public String memberAccount() {
-		return "member_account";
+		return "Not_logged";
 	}
 	
 	@RequestMapping("/emailFind")
@@ -97,11 +97,7 @@ public class MemberController {
 	}
 	
 	
-	@RequestMapping("/")
-	public String member() {
-		return "";
-	}
-	
+
 	
 	
 	

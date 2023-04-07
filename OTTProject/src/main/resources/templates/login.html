@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html 
-	xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
+	<meta charset="UTF-8">
 	<title>로그인</title>
 </head>
 <style>
@@ -116,20 +116,37 @@
 </style>
 <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
 	crossorigin="anonymous">
-</script>
+	</script>
 
 <script>
 	$(document).ready(function () {
 		const checkbox = $('#checkbox');
-
 		checkbox.change(function () {
 			if (this.checked) {
 				alert('공공PC에서 사용시 개인정보가 유출될 수 있어요! 꼭 개인 PC에서 사용하세요.');
 			}
 		});
 	});
-	$(function() {
-		
+	$("#login_bu").click(function(){
+		let email = $(this).val();
+		$.ajax({
+			url: "/member/login",
+			type: "POST",
+			dataType: "json",
+			data: {"email" : email},
+			success: function(data) {
+				
+				if (result == 0) {
+					alert("이메일 또는 비밀번호를 다시 한 번 확인해주새요.");
+				} else if (result == null) {
+					if (result == null) {
+						alert("오류 발생");
+					} else {
+						location.href("/member/login");
+					}
+				}
+
+			});
 	});
 
 
@@ -157,4 +174,5 @@
 		</div>
 	</div>
 </body>
+
 </html>
