@@ -1,5 +1,7 @@
 package com.ott.dto;
 
+import java.io.File;
+
 import org.apache.ibatis.type.Alias;
 
 @Alias("file")
@@ -9,15 +11,15 @@ public class FileDTO {
 	private int inquiryNum;
 	private int fileNum;
 	private String type;
-	
-	public FileDTO() {}
 
-	public FileDTO(String path, String fileName, int inquiryNum, int fileNum, String type) {
-		this.path = path;
-		this.fileName = fileName;
+	public FileDTO() {
+	}
+
+	public FileDTO(File file, int inquiryNum, int fileNum) {
+		this.path = file.getAbsolutePath();
+		this.fileName = file.getName();
 		this.inquiryNum = inquiryNum;
 		this.fileNum = fileNum;
-		this.type = type;
 		switch (fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase()) {
 		case "png":
 		case "jpg":
@@ -28,10 +30,7 @@ public class FileDTO {
 		default:
 			this.type = "normal";
 		}
-	}
-	
-	public String getFileName() {
-		return fileName;
+
 	}
 
 	public String getPath() {
@@ -39,7 +38,27 @@ public class FileDTO {
 	}
 
 	public void setPath(String path) {
+		File file = new File(path);
+		this.fileName = file.getName();
+		switch (fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase()) {
+		case "png":
+		case "jpg":
+		case "bmp":
+		case "gif":
+			this.type = "image";
+			break;
+		default:
+			this.type = "normal";
+		}
 		this.path = path;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 	public int getInquiryNum() {
@@ -66,20 +85,10 @@ public class FileDTO {
 		this.type = type;
 	}
 
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-
 	@Override
 	public String toString() {
 		return "FileDTO [path=" + path + ", fileName=" + fileName + ", inquiryNum=" + inquiryNum + ", fileNum="
 				+ fileNum + ", type=" + type + "]";
 	}
-	
-	
-	
-	
-	
-	
-	
+
 }

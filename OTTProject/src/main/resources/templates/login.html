@@ -127,27 +127,7 @@
 			}
 		});
 	});
-	$("#login_bu").click(function(){
-		let email = $(this).val();
-		$.ajax({
-			url: "/member/login",
-			type: "POST",
-			dataType: "json",
-			data: {"email" : email},
-			success: function(data) {
-				
-				if (result == 0) {
-					alert("이메일 또는 비밀번호를 다시 한 번 확인해주새요.");
-				} else if (result == null) {
-					if (result == null) {
-						alert("오류 발생");
-					} else {
-						location.href("/member/login");
-					}
-				}
-
-			});
-	});
+	
 
 
 </script>
